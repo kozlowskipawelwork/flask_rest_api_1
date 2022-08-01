@@ -1,1 +1,1 @@
-# flask_rest_app
+# This is a flask application with HTTP methods as GET, POST, PUT, PATCH and DELETE.
