@@ -16,19 +16,19 @@ def test_page():#always make a new name for the route(?)
 
 
 @app.route('/html')# basic html page rendering
-def html_page():#always make a new name for the route(?)
+def html_page():
     return render_template('index.html')
 
 
 @app.route('/query-string')# a route for querying strings
-def get_query_string():#always make a new name for the route(?)
+def get_query_string():
     if request.args:
         req = request.args
         return ' '.join(f'{k}:{v}' for k, v in req.items())    
     return 'no query' 
 
 
-# a order collection(so an ordered dictionary?) containing order details - THIS IS NOT A COLLECTION- ITS A REGULAR DICTIONARY? WHAT 
+# a order collection containing order details 
 order ={
     '1':{
         'Size':'Small',
@@ -37,7 +37,7 @@ order ={
     },
     '2':{
         'Size':'Medium',
-        'Toppings':'Cheese',#can i assign many values to a key here? I suppose I can
+        'Toppings':'Cheese',
         'Crust':'Burned'
     }
     
@@ -69,7 +69,7 @@ def get_order_details(order_id,items):
     return 'Order not found'
 
 #HTTP POST method that creates a new key and values
-@app.route("/orders-list/<order_id>", methods=["POST"])#needs to be in "" braces?
+@app.route("/orders-list/<order_id>", methods=["POST"])
 def make_order(order_id):
     req = request.get_json()
     if order_id in order:
@@ -80,7 +80,7 @@ def make_order(order_id):
     return response
 
 #HTTP PUT method that updates a key and values it they exist or make a new one
-@app.route("/orders-list/<order_id>", methods=["PUT"])#needs to be in "" braces?
+@app.route("/orders-list/<order_id>", methods=["PUT"])
 def change_order(order_id):
     req = request.get_json()
     if order_id in order:
@@ -93,7 +93,7 @@ def change_order(order_id):
     return response
 
 #HTTP PATCH method that updates a single value within a key
-@app.route("/orders-list/<order_id>", methods=["PATCH"])#needs to be in "" braces?
+@app.route("/orders-list/<order_id>", methods=["PATCH"])
 def change_order_details(order_id):
     req = request.get_json()
     if order_id in order:
